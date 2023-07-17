@@ -1,4 +1,5 @@
 import './App.css'
+import BookHouseForm from './components/BookHouseForm/BookHouseForm';
 import Home from './components/Home/Home';
 import HouseDetails from './components/HouseDetails/HouseDetails';
 import Navbar from './components/Navbar/Navbar'
@@ -16,6 +17,9 @@ function App() {
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/house/:id' element={<HouseDetails />} />
+            <Route path='/book/:id' element={<BookHouseForm />} />
+
+            <Route path='/dashboard' element={} />
         </Routes>
       </div>
     </div>

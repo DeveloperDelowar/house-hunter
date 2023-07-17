@@ -1,5 +1,6 @@
 import React from 'react';
 import image from '../../assets/home.jpeg';
+import { Link } from 'react-router-dom';
 
 const HouseDetails = () => {
     return (
@@ -21,7 +22,9 @@ const HouseDetails = () => {
             <p className='mt-4'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat distinctio alias vero eius, facilis repellat repellendus? Iusto cupiditate debitis nemo.</p>
 
             <div className='mt-8'>
-                <button className="btn btn-active btn-neutral">Let's Book</button>
+                <button className="btn btn-active btn-neutral">
+                    <Link to='/book/111'>Let's Book</Link>
+                </button>
             </div>
         </div>
     );

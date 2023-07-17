@@ -1,11 +1,14 @@
-import React from 'react';
-import { BiUserCircle } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     return (
         <div className="navbar bg-base-100">
             <div className="flex-1">
-                <a className="normal-case text-xl">House Hunter</a>
+                <a className="normal-case text-xl font-bold">
+                    <Link to='/'>
+                        House Hunter
+                    </Link>
+                </a>
             </div>
             <div className="flex-none gap-2">
                 <div className="form-control">
