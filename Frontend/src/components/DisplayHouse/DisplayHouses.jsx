@@ -1,4 +1,3 @@
-import React from 'react';
 import { AiFillFilter } from 'react-icons/ai';
 import Range from '../shared/Range/Range';
 import HomeCard from '../shared/HomeCard/HomeCard';

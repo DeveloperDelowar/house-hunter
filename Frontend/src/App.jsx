@@ -1,6 +1,8 @@
 import './App.css'
+import Home from './components/Home/Home';
+import HouseDetails from './components/HouseDetails/HouseDetails';
 import Navbar from './components/Navbar/Navbar'
-import DisplayHouses from './components/DisplayHouse/DisplayHouses'
+import {Route, Routes} from "react-router-dom";
 
 function App() {
 
@@ -9,8 +11,12 @@ function App() {
     <div className='bg-gray-10'>
       <div className=' w-11/12 mx-auto '>
         <Navbar />
-        <DisplayHouses/>
+        
 
+        <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/house/:id' element={<HouseDetails />} />
+        </Routes>
       </div>
     </div>
   )
