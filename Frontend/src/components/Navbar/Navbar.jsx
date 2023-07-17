@@ -17,7 +17,9 @@ const Navbar = () => {
                 <div className="dropdown dropdown-end">
                     <div className="avatar placeholder">
                         <div className="bg-neutral-focus text-neutral-content rounded-full w-8 cursor-pointer">
-                            <span className="text-xs" title='Dashboard'>AA</span>
+                            <Link to='/dashboard'>
+                                <span className="text-xs" title='Dashboard'>AA</span>
+                            </Link>
                         </div>
                     </div>
 

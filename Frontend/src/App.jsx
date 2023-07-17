@@ -1,5 +1,6 @@
 import './App.css'
 import BookHouseForm from './components/BookHouseForm/BookHouseForm';
+import Dashboard from './components/Dashboard/Dashboard';
 import Home from './components/Home/Home';
 import HouseDetails from './components/HouseDetails/HouseDetails';
 import Navbar from './components/Navbar/Navbar'
@@ -19,7 +20,7 @@ function App() {
             <Route path='/house/:id' element={<HouseDetails />} />
             <Route path='/book/:id' element={<BookHouseForm />} />
 
-            <Route path='/dashboard' element={} />
+            <Route path='/dashboard' element={<Dashboard />} />
         </Routes>
       </div>
     </div>
