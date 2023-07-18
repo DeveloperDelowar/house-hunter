@@ -5,7 +5,7 @@ import {setAccessToken} from "../../Utilities/GetAndSetToken";
 import { useState } from 'react';
 import Loading from "../shared/Loading/Loading";
 
-const Register = () => {
+const Register = ({setRefresh, refresh}) => {
     const [isLoading, setLoading] = useState(false);
     const {simpleMessageDisplay} = useModal();
 
@@ -46,6 +46,9 @@ const Register = () => {
 
         axios.post(url, data)
         .then(res => {
+            // set refresh
+            setRefresh(!refresh);
+            
             if(res.data?.token){
                 // set loading 
                 setLoading(false);

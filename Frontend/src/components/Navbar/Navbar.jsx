@@ -1,7 +1,17 @@
 import { Link } from "react-router-dom";
-import {RiLoginCircleLine} from "react-icons/ri";
+import { RiLoginCircleLine } from "react-icons/ri";
+import {BiUserCircle} from "react-icons/bi";
+import { getAccessToken } from "../../Utilities/GetAndSetToken";
+import { useEffect, useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({refresh}) => {
+    const [token, setToken] = useState('');
+
+    useEffect(()=>{
+        const token = getAccessToken();
+        setToken(token);
+    }, [refresh]);
+
     return (
         <div className="navbar bg-base-100">
             <div className="flex-1">
@@ -17,17 +27,20 @@ const Navbar = () => {
                 </div>
                 <div className="dropdown dropdown-end">
                     <div className="avatar placeholder">
-                        <h3>
+                       {!token && <h3>
                             <Link to='/login' className="flex items-center">
-                                <RiLoginCircleLine className="mr-1 mt-1"/>
+                                <RiLoginCircleLine className="mr-1 mt-1" />
                                 <span>Login</span>
                             </Link>
-                        </h3>
-                        {/* <div className="bg-neutral-focus text-neutral-content rounded-full w-8 cursor-pointer">
+                        </h3>}
+
+                        {token && <div className="bg-neutral-focus text-neutral-content rounded-full w-8 cursor-pointer">
                             <Link to='/dashboard'>
-                                <span className="text-xs" title='Dashboard'>AA</span>
+                                <span className="text-xs" title='Dashboard'>
+                                    <BiUserCircle />
+                                </span>
                             </Link>
-                        </div> */}
+                        </div>}
                     </div>
 
                 </div>

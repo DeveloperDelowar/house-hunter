@@ -1,9 +1,24 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import img from "../../assets/home.jpeg";
-import {BiSolidBuildingHouse} from "react-icons/bi";
-import {BsHouseFill} from "react-icons/bs";
+import { BiSolidBuildingHouse } from "react-icons/bi";
+import { BsHouseFill } from "react-icons/bs";
+import useUser from "../../Hooks/useUser";
+import Loading from "../shared/Loading/Loading";
+import { clearAccessToken } from "../../Utilities/GetAndSetToken";
 
-const Dashboard = () => {
+const Dashboard = ({setRefresh, refresh}) => {
+    const navigate = useNavigate();
+    const [user, loading] = useUser();
+
+    const handleLogout = () => {
+        clearAccessToken();
+        navigate('/login');
+        setRefresh(!refresh);
+    }
+
+    if (loading) {
+        return <Loading />
+    }
 
     return (
         <div className="drawer lg:drawer-open ">
@@ -26,25 +41,45 @@ const Dashboard = () => {
                             </div>
                         </div>
 
-                        <h2 className="text-lg text-center mt-2 font-bold"> Delowar</h2>
+                        <h2 className="text-lg text-center mt-2 font-bold"> Your Dashboard</h2>
                     </div>
 
                     <ul className="menu">
-                        {/* Sidebar content here */}
-                        <li>
-                            <Link to='bookings'>
-                                <BiSolidBuildingHouse />
-                                Booking
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to='houses'>
-                                <BsHouseFill />
-                                Houses
-                            </Link>
-                        </li>
+                        {
+                            user?.role === 'woner' && (
+                                <>
+                                    <li>
+                                        <Link to='/dashboard'>
+                                            <BiSolidBuildingHouse />
+                                            Booking
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to='houses'>
+                                            <BsHouseFill />
+                                            Houses
+                                        </Link>
+                                    </li>
+                                </>
+                            )
+                        }
+
+                        {
+                            user?.role === "renter" && (
+                                <li>
+                                    <Link to='my-bookings'>
+                                        <BsHouseFill />
+                                        My Bookings
+                                    </Link>
+                                </li>
+                            )
+                        }
 
                     </ul>
+                    <button
+                        onClick={handleLogout}
+                        className="bg-black text-white p-1 text-lg rounded-lg mt-5"
+                    >Logout</button>
                 </div>
             </div>
         </div>

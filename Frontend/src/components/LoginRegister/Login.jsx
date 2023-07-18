@@ -1,8 +1,36 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { setAccessToken } from '../../Utilities/GetAndSetToken';
 
-const Login = () => {
+const Login = ({setRefresh, refresh}) => {
 
-    const handleLogin = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    let from = location.state?.from?.pathname || "/";
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+
+        const url = `http://localhost:5050/api/user/login`;
+
+        fetch(url, {
+            method : "POST",
+            headers : {
+                'content-type' : "application/json"
+            },
+            body : JSON.stringify({email, password})
+        })
+        .then(res => res.json())
+        .then(res => {
+
+            if(res?.token){
+                navigate(from);
+                setAccessToken(res?.token);
+                setRefresh(!refresh);
+            }
+
+        });
 
     }
     return (
@@ -12,10 +40,10 @@ const Login = () => {
                 <h3 className='text-2xl font-bold mb-2 text-center'>Login</h3>
 
                 <label htmlFor="">Email</label>
-                <input type="email" placeholder="Type here" className="input input-bordered input-sm w-full max-w-xs mb-2" required />
+                <input type="email" name='email' placeholder="Type here" className="input input-bordered input-sm w-full max-w-xs mb-2" required />
 
                 <label htmlFor="">Password</label>
-                <input type="password" placeholder="Type here" className="input input-bordered input-sm w-full max-w-xs mb-2" required />
+                <input type="password" name='password' placeholder="Type here" className="input input-bordered input-sm w-full max-w-xs mb-2" required />
 
                 <p>
                     Need and account?

@@ -8,4 +8,8 @@ const getAccessToken = () =>{
     return token;
 }
 
-export {setAccessToken, getAccessToken}
+const clearAccessToken = () => {
+    localStorage.clear('access-token');
+}
+
+export {setAccessToken, getAccessToken, clearAccessToken}
