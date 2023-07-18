@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import {RiLoginCircleLine} from "react-icons/ri";
 
 const Navbar = () => {
     return (
@@ -11,16 +12,22 @@ const Navbar = () => {
                 </a>
             </div>
             <div className="flex-none gap-2">
-                <div className="form-control">
+                <div className="form-control mr-5">
                     <input type="text" placeholder="Search..." className="input input-bordered input-sm w-full max-w-xs" autoFocus />
                 </div>
                 <div className="dropdown dropdown-end">
                     <div className="avatar placeholder">
-                        <div className="bg-neutral-focus text-neutral-content rounded-full w-8 cursor-pointer">
+                        <h3>
+                            <Link to='/login' className="flex items-center">
+                                <RiLoginCircleLine className="mr-1 mt-1"/>
+                                <span>Login</span>
+                            </Link>
+                        </h3>
+                        {/* <div className="bg-neutral-focus text-neutral-content rounded-full w-8 cursor-pointer">
                             <Link to='/dashboard'>
                                 <span className="text-xs" title='Dashboard'>AA</span>
                             </Link>
-                        </div>
+                        </div> */}
                     </div>
 
                 </div>

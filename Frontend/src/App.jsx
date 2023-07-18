@@ -8,6 +8,7 @@ import Navbar from './components/Navbar/Navbar'
 import {Route, Routes} from "react-router-dom";
 import Bookings from './components/Dashboard/Owner/Bookings';
 import AddNewHouse from './components/Dashboard/Owner/AddNewHouse';
+import Login from './components/LoginRegister/Login';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
 
         <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
             <Route path='/house/:id' element={<HouseDetails />} />
             <Route path='/book/:id' element={<BookHouseForm />} />
 
