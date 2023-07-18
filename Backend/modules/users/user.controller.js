@@ -10,6 +10,17 @@ const getAccessToken = (email) => {
     return token;
 }
 
+const getEmailFromToken = (token) => {
+    const email = jwt.verify(token, process.env.ACCESS_TOKEN, (err, decoded) => {
+
+        if (decoded.email) {
+            return decoded.email;
+        } 
+    });
+
+    return email;
+}
+
 // Add new user
 const addUserToBD = async (req, res) => {
     try {
@@ -32,7 +43,7 @@ const addUserToBD = async (req, res) => {
         res.send({
             message: 'Successful',
             data: user,
-            token : getAccessToken(email)
+            token: getAccessToken(email)
         });
     }
     catch (err) {
@@ -58,11 +69,11 @@ const loginUser = async (req, res) => {
             return
         }
 
-        if(user.password === password){
+        if (user.password === password) {
             res.send({
-                message : 'Successful.',
-                data : user,
-                token : getAccessToken(email)
+                message: 'Successful.',
+                data: user,
+                token: getAccessToken(email)
             });
         }
     }
@@ -75,7 +86,27 @@ const loginUser = async (req, res) => {
 
 }
 
+const getUserByToken = async (req, res) => {
+    try {
+        const token = req?.headers?.auth;
+        const email = getEmailFromToken(token);
+        const user = await userModel.findOne({email});
+
+        res.send({
+            message : 'successful',
+            data : user
+        })
+    }
+    catch (err) {
+        res.send({
+            message: 'Faild',
+            data: err
+        });
+    }
+}
+
 module.exports = {
     addUserToBD,
     loginUser,
+    getUserByToken
 }

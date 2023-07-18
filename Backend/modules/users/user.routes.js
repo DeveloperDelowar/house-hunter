@@ -2,12 +2,14 @@ const express = require('express');
 const router = express.Router();
 const {
     addUserToBD,
-    loginUser
+    loginUser,
+    getUserByToken
 } = require('./user.controller');
 
 
 router.post('/create-account', addUserToBD);
-router.get('/login', loginUser);
+router.post('/login', loginUser);
+router.get('/find-user-by-token', getUserByToken);
 
 
 
