@@ -13,15 +13,15 @@ const getAccessToken = (email) => {
 // Add new user
 const addUserToBD = async (req, res) => {
     try {
-        const userInfo  = req.body;
-        const {email} = userInfo;
-        
+        const userInfo = req.body;
+        const { email } = userInfo;
+
         const findUser = await userModel.findOne({ email });
-     
-        if(findUser){
+
+        if (findUser) {
             res.send({
-                message : 'This email has been used.',
-                data : null
+                message: 'This email has been used.',
+                data: null
             });
             return
         }
@@ -30,19 +30,52 @@ const addUserToBD = async (req, res) => {
         user.save();
 
         res.send({
-            message : 'Successful',
-            data : getAccessToken(email)
+            message: 'Successful',
+            data: user,
+            token : getAccessToken(email)
         });
     }
-    catch(err){
+    catch (err) {
         res.send({
-            message : 'Faild',
-            data : err
+            message: 'Faild',
+            data: err
         });
     }
 }
 
+// login user
+const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await userModel.findOne({ email });
+
+        if (!user) {
+            res.send({
+                message: 'You need to create an account.',
+                data: null
+            });
+
+            return
+        }
+
+        if(user.password === password){
+            res.send({
+                message : 'Successful.',
+                data : user,
+                token : getAccessToken(email)
+            });
+        }
+    }
+    catch (err) {
+        res.send({
+            message: 'Faild',
+            data: err
+        });
+    }
+
+}
 
 module.exports = {
     addUserToBD,
+    loginUser,
 }

@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const {
-    addUserToBD
+    addUserToBD,
+    loginUser
 } = require('./user.controller');
 
 
 router.post('/create-account', addUserToBD);
+router.get('/login', loginUser);
 
 
 
