@@ -10,6 +10,7 @@ import Bookings from './components/Dashboard/Owner/Bookings';
 import AddNewHouse from './components/Dashboard/Owner/AddNewHouse';
 import Login from './components/LoginRegister/Login';
 import Register from './components/LoginRegister/Register';
+import Loading from './components/shared/Loading/Loading';
 
 function App() {
 
