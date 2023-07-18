@@ -9,6 +9,7 @@ import {Route, Routes} from "react-router-dom";
 import Bookings from './components/Dashboard/Owner/Bookings';
 import AddNewHouse from './components/Dashboard/Owner/AddNewHouse';
 import Login from './components/LoginRegister/Login';
+import Register from './components/LoginRegister/Register';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
             <Route path='/house/:id' element={<HouseDetails />} />
             <Route path='/book/:id' element={<BookHouseForm />} />
 
