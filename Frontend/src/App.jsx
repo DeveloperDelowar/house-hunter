@@ -7,6 +7,7 @@ import HouseDetails from './components/HouseDetails/HouseDetails';
 import Navbar from './components/Navbar/Navbar'
 import {Route, Routes} from "react-router-dom";
 import Bookings from './components/Dashboard/Owner/Bookings';
+import AddNewHouse from './components/Dashboard/Owner/AddNewHouse';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
 
             <Route path='/dashboard' element={<Dashboard />}> 
               <Route path="houses" element={<Houses />} />
+              <Route path="houses/add-new" element={<AddNewHouse />} />
               <Route path="bookings" element={<Bookings />} />
             </Route>
         </Routes>

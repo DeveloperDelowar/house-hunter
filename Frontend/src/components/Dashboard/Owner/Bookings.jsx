@@ -15,9 +15,9 @@ const Bookings = () => {
                             <th>#No</th>
                             <th>IMG</th>
                             <th>Name</th>
-                            <th>Availability</th>
                             <th>Rent per/mo</th>
                             <th>Phone</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>

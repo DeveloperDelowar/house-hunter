@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Houses = () => {
     return (
@@ -6,7 +7,11 @@ const Houses = () => {
             <div className='flex items-center justify-between mb-5'>
                 <h2 className='text-xl'>House</h2>
 
-                <button className="btn btn-neutral btn-sm">Add New</button>
+                <button className="btn btn-neutral btn-sm">
+                    <Link to='add-new'>
+                        Add New
+                    </Link>
+                </button>
             </div>
 
             {/* Display Houses */}
@@ -19,6 +24,7 @@ const Houses = () => {
                             <th>IMG</th>
                             <th>Availability</th>
                             <th>Rent per/mo</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,6 +34,7 @@ const Houses = () => {
                             <td>Cy Ganderton</td>
                             <td>Quality Control Specialist</td>
                             <td>Blue</td>
+                            <td>Blue</td>
                         </tr>
                         {/* row 2 */}
                         <tr>
@@ -35,12 +42,14 @@ const Houses = () => {
                             <td>Hart Hagerty</td>
                             <td>Desktop Support Technician</td>
                             <td>Purple</td>
+                            <td>Purple</td>
                         </tr>
                         {/* row 3 */}
                         <tr>
                             <th>3</th>
                             <td>Brice Swyre</td>
                             <td>Tax Accountant</td>
+                            <td>Red</td>
                             <td>Red</td>
                         </tr>
                     </tbody>
