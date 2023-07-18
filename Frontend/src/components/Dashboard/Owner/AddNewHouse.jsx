@@ -16,7 +16,10 @@ const AddNewHouse = () => {
                 <input type="text" placeholder="Type here" className="input input-bordered input-sm w-full max-w-xs mb-2" required />
 
                 <label htmlFor="">Bed rooms</label>
-                <input type="number" placeholder="Type here" className="input input-bordered input-sm w-full max-w-xs mb-2" required />
+                <input type="number" max={10} min={1} placeholder="Type here" className="input input-bordered input-sm w-full max-w-xs mb-2" required />
+
+                <label htmlFor="">Bath rooms</label>
+                <input type="number" max={10} min={1} placeholder="Type here" className="input input-bordered input-sm w-full max-w-xs mb-2" required />
 
                 <label htmlFor=""> Room size</label>
                 <input type="number" placeholder="Type here" className="input input-bordered input-sm w-full max-w-xs mb-2" required />

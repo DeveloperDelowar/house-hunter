@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom';
 
 const Login = () => {
+
+    const handleLogin = () => {
+
+    }
     return (
         <div className=' h-screen flex items-center justify-center'>
 
-            <form className=' shadow-md w-[350px] p-3'>
+            <form className=' shadow-md w-[350px] p-3' onSubmit={handleLogin}>
                 <h3 className='text-2xl font-bold mb-2 text-center'>Login</h3>
 
                 <label htmlFor="">Email</label>
