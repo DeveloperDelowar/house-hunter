@@ -48,7 +48,7 @@ const BookHouseForm = () => {
         }
 
         axios.post('http://localhost:5050/api/booking', data)
-        .then(res => {
+        .then((err) => {
             setLoading(false);
             successFullModal('Booking successful');
             navigate('/dashboard');

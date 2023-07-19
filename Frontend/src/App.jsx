@@ -13,9 +13,18 @@ import Register from './components/LoginRegister/Register';
 import { useState } from 'react';
 import RequireAuth from './components/shared/RequireAuth/RequireAuth';
 import HouseInfoEdit from './components/Dashboard/Owner/HouseInfoEdit';
+import Loading from './components/shared/Loading/Loading';
+import useUser from './Hooks/useUser';
+import MyDashboard from './components/Dashboard/Renter/MyDashboard';
 
 function App() {
   const [refresh, setRefresh] = useState(false);
+  const [user, loading] = useUser();
+
+
+  if (loading) {
+    return <Loading />
+  }
 
   return (
     <div className='bg-gray-10'>
@@ -36,7 +45,7 @@ function App() {
           />} />
 
           <Route path='/house/:id' element={<HouseDetails />} />
-          
+
           <Route path='/book/:id' element={
             <RequireAuth>
               <BookHouseForm />
@@ -50,7 +59,16 @@ function App() {
               />
             </RequireAuth>
           }>
-            <Route index element={<Bookings />} />
+            {
+              user?.role === 'woner' &&
+              <Route index element={<Bookings />} />
+
+            }
+
+            {
+              user?.role === 'renter' &&
+              <Route index element={<MyDashboard />} />
+            }
             <Route path='houses' element={<Houses />} />
             <Route path="houses/add-new" element={<AddNewHouse />} />
             <Route path="houses/update/:id" element={<HouseInfoEdit />} />

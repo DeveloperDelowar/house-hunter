@@ -67,7 +67,7 @@ const Dashboard = ({setRefresh, refresh}) => {
                         {
                             user?.role === "renter" && (
                                 <li>
-                                    <Link to='my-bookings'>
+                                    <Link to='/dashboard'>
                                         <BsHouseFill />
                                         My Bookings
                                     </Link>
