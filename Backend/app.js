@@ -7,6 +7,7 @@ const app = express();
 // Require routes
 const userRouter = require('./modules/users/user.routes');
 const houseRouter = require('./modules/House/house.routes');
+const bookingRouter = require('./modules/Book/book.routes');
 
 
 // middlewar
@@ -18,5 +19,6 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: false, parameterLimit: 
 // user router
 app.use('/api/user', userRouter);
 app.use('/api/house', houseRouter);
+app.use('/api/booking', bookingRouter);
 
 module.exports = app;

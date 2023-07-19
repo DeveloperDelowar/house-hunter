@@ -103,8 +103,27 @@ const getUserByToken = async (req, res) => {
     }
 }
 
+// find user info by email
+const findUserByEmail = async(req, res) => {
+    try{
+        const {email} = req.query;
+        const user = await userModel.findOne({email});
+        res.send({
+            message : 'Successful',
+            data : user
+        })
+    }
+    catch (err) {
+        res.send({
+            message: 'Faild',
+            data: err
+        });
+    }
+}
+
 module.exports = {
     addUserToBD,
     loginUser,
-    getUserByToken
+    getUserByToken,
+    findUserByEmail
 }

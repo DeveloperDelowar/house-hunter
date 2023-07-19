@@ -101,10 +101,28 @@ const updateUserById = async (req, res) => {
     }
 }
 
+// Get all houses
+const getAllHouses = async(req, res) => {
+    try{
+        const houses = await houseModel.find();
+        res.send({
+            message : 'successful',
+            data : houses
+        })
+    }
+    catch (err) {
+        res.send({
+            message: 'Faild',
+            data: err
+        });
+    }
+}
+
 module.exports = {
     addNewHouseToDB,
     getHousesByWonerEmail,
     deleteHouseToDB,
     findHouseById,
-    updateUserById
+    updateUserById,
+    getAllHouses
 }

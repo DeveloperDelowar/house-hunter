@@ -5,10 +5,12 @@ const {
     getHousesByWonerEmail,
     deleteHouseToDB,
     findHouseById,
-    updateUserById
+    updateUserById,
+    getAllHouses
 } = require('./house.controller');
 
-router.get('/', getHousesByWonerEmail);
+router.get('/', getAllHouses);
+router.get('/my-houses', getHousesByWonerEmail);
 router.get('/:id', findHouseById);
 router.delete('/:id', deleteHouseToDB);
 router.post('/add-new-house', addNewHouseToDB);
