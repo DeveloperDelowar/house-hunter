@@ -12,6 +12,7 @@ import Login from './components/LoginRegister/Login';
 import Register from './components/LoginRegister/Register';
 import { useState } from 'react';
 import RequireAuth from './components/shared/RequireAuth/RequireAuth';
+import HouseInfoEdit from './components/Dashboard/Owner/HouseInfoEdit';
 
 function App() {
   const [refresh, setRefresh] = useState(false);
@@ -48,6 +49,7 @@ function App() {
             <Route index element={<Bookings />} />
             <Route path='houses' element={<Houses />} />
             <Route path="houses/add-new" element={<AddNewHouse />} />
+            <Route path="houses/update/:id" element={<HouseInfoEdit />} />
           </Route>
         </Routes>
       </div>

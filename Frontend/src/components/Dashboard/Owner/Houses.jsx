@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import useUser from './../../../Hooks/useUser';
 import Loading from "../../shared/Loading/Loading";
 import useModal from './../../../Hooks/useModal';
 
 const Houses = () => {
+    const navigate = useNavigate();
     const [refresh, setRefresh] = useState(false);
     const [user, userLoading] = useUser();
     const [loading, setLoading] = useState(false);
@@ -103,7 +104,9 @@ const Houses = () => {
 
                                     {/* Action button */}
                                     <td>
-                                        <button className="btn btn-active btn-neutral btn-sm mr-2">Edit</button>
+                                        <button 
+                                        onClick={()=> navigate(`update/${_id}`)}
+                                        className="btn btn-active btn-neutral btn-sm mr-2">Edit</button>
 
                                         <button
                                             onClick={() => deleteHouse(_id)}
