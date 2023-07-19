@@ -17,7 +17,7 @@ const HouseDetails = () => {
             .then(res => {
                 // set Loading
                 setLoading(false);
-                setHouse(res);
+                setHouse(res?.data);
             })
     }, []);
 
@@ -26,6 +26,7 @@ const HouseDetails = () => {
     }
 
     const {
+        _id,
         name,
         address,
         city,
@@ -37,7 +38,7 @@ const HouseDetails = () => {
         picture,
         description,
         availablityDate,
-    } = house.data
+    } = house
 
     return (
         <div className=' w-7/12 mx-auto mt-5 flex flex-col justify-center'>
@@ -57,7 +58,7 @@ const HouseDetails = () => {
 
             <div className='mt-8'>
                 <button className="btn btn-active btn-neutral">
-                    <Link to='/book/111'>Let's Book</Link>
+                    <Link to={`/book/${_id}`}>Let's Book</Link>
                 </button>
             </div>
         </div>

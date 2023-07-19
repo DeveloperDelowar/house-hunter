@@ -36,7 +36,11 @@ function App() {
           />} />
 
           <Route path='/house/:id' element={<HouseDetails />} />
-          <Route path='/book/:id' element={<BookHouseForm />} />
+          
+          <Route path='/book/:id' element={
+            <RequireAuth>
+              <BookHouseForm />
+            </RequireAuth>} />
 
           <Route path='/dashboard' element={
             <RequireAuth>
