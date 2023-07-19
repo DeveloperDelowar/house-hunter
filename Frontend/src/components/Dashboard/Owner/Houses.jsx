@@ -32,7 +32,7 @@ const Houses = () => {
             // set loading
             setLoading(true);
 
-            const url = `http://localhost:5050/api/house/${id}`;
+            const url = `http://localhost:5050/api/house/my-houses/${id}`;
 
             axios.delete(url)
                 .then(() => {

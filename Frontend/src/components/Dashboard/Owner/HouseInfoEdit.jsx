@@ -1,8 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import Loading from '../../shared/Loading/Loading';
+import useUser from '../../../Hooks/useUser';
 
 const HouseInfoEdit = () => {
+    const [user, userLoading] = useUser();
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     const { id } = useParams();
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
@@ -17,9 +22,15 @@ const HouseInfoEdit = () => {
     const [availablityDate, setAvailablityDate] = useState('');
 
     useEffect(() => {
+        // set Loading
+        setLoading(true);
+
         fetch(`http://localhost:5050/api/house/${id}`)
             .then(res => res.json())
             .then(res => {
+                // set Loading
+                setLoading(false);
+
                 const {
                     name,
                     address,
@@ -48,6 +59,10 @@ const HouseInfoEdit = () => {
     }, []);
 
     const handleSubmit = (e) => {
+        e.preventDefault();
+        // set Loading
+        setLoading(true);
+
         const data = {
             name,
             address,
@@ -60,12 +75,21 @@ const HouseInfoEdit = () => {
             picture,
             description,
             availablityDate,
+            wonerEmail : user?.email
         }
 
-        // axios.patch('http://localhost:5050/api/house/update-info', data)
-        // .then(res => {
-        //     console.log(res);
-        // })
+        axios.patch(`http://localhost:5050/api/house/update-info/${id}`, data)
+            .then((res) => {
+                // set Loading
+                setLoading(false);
+                console.log(res.data)
+                navigate('/dashboard/houses')
+            });
+    }
+
+    // set loading
+    if (loading || userLoading) {
+        return <Loading />
     }
 
     return (

@@ -1,8 +1,28 @@
 import { AiFillFilter } from 'react-icons/ai';
 import Range from '../shared/Range/Range';
 import HomeCard from '../shared/HomeCard/HomeCard';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import Loading from '../shared/Loading/Loading';
 
 const DisplayHouses = () => {
+    const [loading, setLoading] = useState(false);
+    const [houses, setHouses] = useState([]);
+
+    useEffect(() => {
+        setLoading(true);
+
+        axios.get('http://localhost:5050/api/house')
+            .then(res => {
+                setLoading(false);
+                setHouses(res.data?.data)
+            });
+    }, []);
+
+    if (loading) {
+        return <Loading />
+    }
+
     return (
         <div className="drawer lg:drawer-open ">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -14,9 +34,11 @@ const DisplayHouses = () => {
                 </label>
 
                 <div className='m-5 grid-cols-1 grid gap-4 md:grid-cols-3'>
-                    <HomeCard />
-                    <HomeCard />
-                    <HomeCard />
+                    {
+                        houses?.map((house) => <HomeCard 
+                        key={house._id}
+                         houseInfo={house} />)
+                    }
                 </div>
 
             </div>
