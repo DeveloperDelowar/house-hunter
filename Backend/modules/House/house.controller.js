@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const houseModel = require("./house.model");
+const userModel = require("../users/user.model");
 
 // Add a new house
 const addNewHouseToDB = async (req, res) => {
@@ -79,11 +80,31 @@ const findHouseById = async (req, res) => {
     }
 }
 
+// update user by id
+const updateUserById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedInfo = req.body;
+        const result = await houseModel.updateOne({_id : id}, {$set : updatedInfo});
 
+        res.send({
+            message: 'Successful',
+            data: result
+        });
+
+    }
+    catch (err) {
+        res.send({
+            message: 'Faild',
+            data: err
+        });
+    }
+}
 
 module.exports = {
     addNewHouseToDB,
     getHousesByWonerEmail,
     deleteHouseToDB,
-    findHouseById
+    findHouseById,
+    updateUserById
 }
