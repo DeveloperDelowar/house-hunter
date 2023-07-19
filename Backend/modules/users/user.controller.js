@@ -15,7 +15,7 @@ const getEmailFromToken = (token) => {
 
         if (decoded.email) {
             return decoded.email;
-        } 
+        }
     });
 
     return email;
@@ -91,7 +91,7 @@ const getUserByToken = async (req, res) => {
     try {
         const token = req?.headers?.auth;
         const email = getEmailFromToken(token);
-        const user = await userModel.findOne({email}, {email : 1, role : 1});
+        const user = await userModel.findOne({ email }, { email: 1, role: 1 });
 
         res.send(user);
     }
@@ -104,13 +104,13 @@ const getUserByToken = async (req, res) => {
 }
 
 // find user info by email
-const findUserByEmail = async(req, res) => {
-    try{
-        const {email} = req.query;
-        const user = await userModel.findOne({email});
+const findUserByEmail = async (req, res) => {
+    try {
+        const { email } = req.query;
+        const user = await userModel.findOne({ email });
         res.send({
-            message : 'Successful',
-            data : user
+            message: 'Successful',
+            data: user
         })
     }
     catch (err) {
@@ -119,11 +119,11 @@ const findUserByEmail = async(req, res) => {
             data: err
         });
     }
-}
+};
 
 module.exports = {
     addUserToBD,
     loginUser,
     getUserByToken,
-    findUserByEmail
+    findUserByEmail,
 }

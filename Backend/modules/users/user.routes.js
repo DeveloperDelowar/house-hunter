@@ -4,7 +4,7 @@ const {
     addUserToBD,
     loginUser,
     getUserByToken,
-    findUserByEmail
+    findUserByEmail,
 } = require('./user.controller');
 
 
