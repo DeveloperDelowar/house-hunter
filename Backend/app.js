@@ -6,15 +6,17 @@ const app = express();
 
 // Require routes
 const userRouter = require('./modules/users/user.routes');
+const houseRouter = require('./modules/House/house.routes');
 
 
 // middlewar
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: false, parameterLimit: 50000 }));
 
 // user router
 app.use('/api/user', userRouter);
+app.use('/api/house', houseRouter);
 
 module.exports = app;

@@ -86,16 +86,14 @@ const loginUser = async (req, res) => {
 
 }
 
+// Find user by token
 const getUserByToken = async (req, res) => {
     try {
         const token = req?.headers?.auth;
         const email = getEmailFromToken(token);
-        const user = await userModel.findOne({email});
+        const user = await userModel.findOne({email}, {email : 1, role : 1});
 
-        res.send({
-            message : 'successful',
-            data : user
-        })
+        res.send(user);
     }
     catch (err) {
         res.send({
