@@ -1,7 +1,59 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import useUser from './../../../Hooks/useUser';
+import Loading from "../../shared/Loading/Loading";
+import useModal from './../../../Hooks/useModal';
 
 const Houses = () => {
+    const [refresh, setRefresh] = useState(false);
+    const [user, userLoading] = useUser();
+    const [loading, setLoading] = useState(false);
+    const [houses, setHouses] = useState([]);
+    const { deleteModal } = useModal();
+
+    useEffect(() => {
+        // Set loading
+        setLoading(true);
+
+        const url = `http://localhost:5050/api/house?email=${user?.email}`
+        axios.get(url)
+            .then(res => {
+                setHouses(res?.data?.data);
+                // Stop loading
+                setLoading(false);
+            });
+    }, [user, refresh]);
+
+    // Delete house
+    const deleteHouse = (id) => {
+        deleteModal(() => {
+            // set loading
+            setLoading(true);
+
+            const url = `http://localhost:5050/api/house/${id}`;
+
+            axios.delete(url)
+                .then(() => {
+                    // set loading
+                    setLoading(false);
+
+                    setRefresh(!refresh)
+                })
+                .catch(err => {
+                    // set loading
+                    setLoading(false);
+
+                    console.log(err);
+                })
+        });
+    }
+
+    // Set loading
+    if (userLoading || loading) {
+        return <Loading />
+    }
+
     return (
         <div>
             <div className='flex items-center justify-between mb-5'>
@@ -22,36 +74,44 @@ const Houses = () => {
                         <tr>
                             <th>#No</th>
                             <th>IMG</th>
-                            <th>Availability</th>
+                            <th>Name</th>
                             <th>Rent per/mo</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {/* row 1 */}
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
-                            <td>Blue</td>
-                        </tr>
-                        {/* row 2 */}
-                        <tr>
-                            <th>2</th>
-                            <td>Hart Hagerty</td>
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
-                            <td>Purple</td>
-                        </tr>
-                        {/* row 3 */}
-                        <tr>
-                            <th>3</th>
-                            <td>Brice Swyre</td>
-                            <td>Tax Accountant</td>
-                            <td>Red</td>
-                            <td>Red</td>
-                        </tr>
+                        {
+                            houses?.map((house, index) => {
+                                const { picture, rent, name, _id } = house;
+
+                                return (<tr key={house?._id}>
+                                    <td>{index + 1}</td>
+                                    <td>
+                                        <img
+                                            src={picture}
+                                            alt="house"
+                                            className=' w-16'
+                                        />
+                                    </td>
+
+                                    <td>
+                                        {name?.length > 20 ?
+                                            name.slice(0, 20) + '..' : name}
+                                    </td>
+
+                                    <td>{rent}</td>
+
+                                    {/* Action button */}
+                                    <td>
+                                        <button className="btn btn-active btn-neutral btn-sm mr-2">Edit</button>
+
+                                        <button
+                                            onClick={() => deleteHouse(_id)}
+                                            className="btn btn-error btn-sm text-white">Delete</button>
+                                    </td>
+                                </tr>)
+                            })
+                        }
                     </tbody>
                 </table>
             </div>
