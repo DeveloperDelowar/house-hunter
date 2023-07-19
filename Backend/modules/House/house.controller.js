@@ -1,38 +1,45 @@
 const houseModel = require("./house.model");
 
-// Image upload
-const uploadImg = (file, dir, cb) => {
-    file.mv(dir, async (err) => {
-        if (err) {
-            res.send({ message: 'Unable file upload' });
-        }
-        else {
-            cb();
-        }
-    });
-}
-
 // Add a new house
-const addNewHouseToDB = async(req, res) =>{
-    try{
+const addNewHouseToDB = async (req, res) => {
+    try {
         const info = req.body;
         const house = new houseModel(info);
         await house.save();
 
         res.send({
-            message : 'Successful',
-            data : house
+            message: 'Successful',
+            data: house
         })
     }
-    catch(err){
+    catch (err) {
         res.send({
-            message : 'Faild',
-            data : err
+            message: 'Faild',
+            data: err
         });
     }
 }
 
+// get houses
+const getHousesByWonerEmail = async (req, res) => {
+    try {
+        const {email} = req.query;
+        const houses = await houseModel.find({wonerEmail : email});
+        
+        res.send({
+            message : 'Success',
+            data : houses
+        })
+    }
+    catch (err) {
+        res.send({
+            message: 'Faild',
+            data: err
+        });
+    }
+}
 
 module.exports = {
-    addNewHouseToDB, 
+    addNewHouseToDB,
+    getHousesByWonerEmail
 }
