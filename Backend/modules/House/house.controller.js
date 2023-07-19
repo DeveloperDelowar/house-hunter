@@ -46,11 +46,11 @@ const getHousesByWonerEmail = async (req, res) => {
 const deleteHouseToDB = async (req, res) => {
     try {
         const { id } = req.params;
-        const result = await houseModel.deleteOne({_id : id});
+        const result = await houseModel.deleteOne({ _id: id });
 
         res.send({
-            message : 'Successful',
-            data : result
+            message: 'Successful',
+            data: result
         });
     }
     catch (err) {
@@ -61,8 +61,29 @@ const deleteHouseToDB = async (req, res) => {
     }
 }
 
+// find house by id
+const findHouseById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const houseInfo = await houseModel.findById(id);
+        res.send({
+            message: 'Successful',
+            data: houseInfo
+        })
+    }
+    catch (err) {
+        res.send({
+            message: 'Faild',
+            data: err
+        });
+    }
+}
+
+
+
 module.exports = {
     addNewHouseToDB,
     getHousesByWonerEmail,
-    deleteHouseToDB
+    deleteHouseToDB,
+    findHouseById
 }
